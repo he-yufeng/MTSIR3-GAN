@@ -272,7 +272,6 @@ datasets/
 @article{mtsir3gan2025,
   title={MTSIR3-GAN: Adapting R3GAN for Robust Multivariate Time Series Imputation},
   author={He, Yufeng},
-  journal={HKU COMP7103 Data Mining Course Project},
   year={2025}
 }
 ```
