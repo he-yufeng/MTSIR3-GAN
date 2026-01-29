@@ -263,7 +263,6 @@ If you find this work useful, please consider citing:
 @article{mtsir3gan2025,
   title={MTSIR3-GAN: Adapting R3GAN for Robust Multivariate Time Series Imputation},
   author={He, Yufeng},
-  journal={HKU COMP7103 Data Mining Course Project},
   year={2025}
 }
 ```
@@ -293,7 +292,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - SSGAN and TimesNet implementations based on their respective papers
 - GUI framework built with Plotly Dash
 - Datasets from PhysioNet, UCI ML Repository, and eBay
-
----
-
-**Note**: This project was developed as part of the HKU COMP7103 Data Mining course. For academic use, please cite appropriately.
