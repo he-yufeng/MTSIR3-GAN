@@ -291,9 +291,21 @@ datasets/
 - **GitHub**：[@he-yufeng](https://github.com/he-yufeng)
 - **项目链接**：https://github.com/he-yufeng/MTSIR3-GAN
 
+## 📦 第三方组件与许可证
+
+本仓库包含来自外部项目的代码。根目录 MIT 许可证**仅覆盖原创贡献**（1D/时序适配、FMGAN 研究、GUI、工具脚本）。打包的第三方代码各自保留其许可证，详见各文件夹 README：
+
+| 文件夹 | 上游 | 许可证 |
+|--------|------|--------|
+| [`R3GAN/`](R3GAN/) | NVIDIA StyleGAN3 + R3GAN（NeurIPS 2024） | **NVIDIA Source Code License**（研究/非商用） |
+| [`TimesNet/`](TimesNet/) | THUML Time-Series-Library | MIT |
+| [`SSGAN/`](SSGAN/) | Miao et al., AAAI 2021 | 归原作者 |
+
+> ⚠️ `R3GAN/` 含 NVIDIA 许可代码，该目录**不可**按 MIT 使用——复用须遵守上游非商用条款。
+
 ## 📄 许可证
 
-本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE) 文件。
+本仓库原创代码采用 MIT 许可证 - 详见 [LICENSE](LICENSE)。打包的第三方代码见上方「第三方组件」。
 
 ## 🙏 致谢
 

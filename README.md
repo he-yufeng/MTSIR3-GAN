@@ -287,13 +287,32 @@ Key papers and resources:
 - **GitHub**: [@he-yufeng](https://github.com/he-yufeng)
 - **Project Link**: https://github.com/he-yufeng/MTSIR3-GAN
 
+## 📦 Third-Party Components & Licenses
+
+This repository bundles code derived from external projects. The root MIT license
+covers **only the original contributions** (the 1D / time-series adaptation, the
+FMGAN study, GUI glue, and tooling). Bundled third-party code retains its own
+license — see each folder's README:
+
+| Folder | Upstream | License |
+|--------|----------|---------|
+| [`R3GAN/`](R3GAN/) | NVIDIA StyleGAN3 + R3GAN (NeurIPS 2024) | **NVIDIA Source Code License** (research / non-commercial) |
+| [`TimesNet/`](TimesNet/) | THUML Time-Series-Library | MIT |
+| [`SSGAN/`](SSGAN/) | Miao et al., AAAI 2021 | per original authors |
+
+> ⚠️ Because `R3GAN/` includes NVIDIA-licensed code, that directory is **not**
+> usable under MIT — respect the upstream non-commercial terms for any reuse.
+
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Original code in this repository is licensed under the MIT License — see
+[LICENSE](LICENSE). See **Third-Party Components** above for bundled code under
+other licenses.
 
 ## 🙏 Acknowledgments
 
-- R3GAN implementation adapted from the official repository
-- SSGAN and TimesNet implementations based on their respective papers
-- GUI framework built with Plotly Dash
-- Datasets from PhysioNet, UCI ML Repository, and eBay
+- `R3GAN/` builds on [NVIDIA StyleGAN3](https://github.com/NVlabs/stylegan3) and [R3GAN](https://github.com/brownvc/R3GAN)
+- `TimesNet/` is vendored from [THUML Time-Series-Library](https://github.com/thuml/Time-Series-Library) (MIT)
+- `SSGAN/` reproduces the AAAI 2021 baseline by Miao et al.
+- GUI built with [Plotly Dash](https://dash.plotly.com/)
+- Datasets from PhysioNet, the UCI ML Repository, and eBay
