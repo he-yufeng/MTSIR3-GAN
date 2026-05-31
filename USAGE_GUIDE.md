@@ -55,7 +55,7 @@ print("MPS (Apple) available:", getattr(torch.backends, "mps", None) is not None
 
 ### Launch the Web Interface
 ```bash
-cd PURE-GUIv2
+cd PURE-GUIv2.0
 python app_dad.py
 ```
 

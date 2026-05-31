@@ -46,7 +46,7 @@ pip install -r FMGAN/requirements.txt
 ### 启动图形界面
 
 ```bash
-cd PURE-GUIv2
+cd PURE-GUIv2.0
 python app_dad.py
 ```
 
@@ -100,6 +100,8 @@ python run.py --task_name imputation --data PSM --root_path ./datasets/PSM/ \
 ```
 
 ### 3. 模型推理
+
+> *示意代码* —— 张量形状与加载路径请按你训练好的 checkpoint 和 [`R3GAN/`](R3GAN/) 中的架构调整。
 
 ```python
 import torch
