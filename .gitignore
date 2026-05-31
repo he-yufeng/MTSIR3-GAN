@@ -203,3 +203,14 @@ FMGAN/paper/submission_icml2026.zip
 
 # Zip files
 *.zip
+
+# Pretrained weights / cached arrays / demo uploads (regenerate or download; not bundled)
+PURE-GUIv2.0/model_files/
+PURE-GUIv2.0/model_results/
+PURE-GUIv2.0/uploaded_files/
+
+# Working notes & in-review paper sources (keep local, never publish)
+handoff/
+**/SUBMIT_TO_*.md
+**/PAPER_POLISH_NOTES.md
+**/main_milets2026*
