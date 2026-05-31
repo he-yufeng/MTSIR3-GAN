@@ -69,8 +69,23 @@ def cosine_decay(step, total_steps, base_value, final_value):
     return final_value + (base_value - final_value) * decay
 
 
+def pick_device(preferred=None):
+    """Select compute device, supporting CUDA, Apple MPS, and CPU.
+
+    Pass ``preferred`` (e.g. from ``--device``) to force a choice; otherwise
+    auto-detect in order of preference: CUDA > MPS > CPU.
+    """
+    if preferred:
+        return preferred
+    if torch.cuda.is_available():
+        return 'cuda'
+    if getattr(torch.backends, 'mps', None) is not None and torch.backends.mps.is_available():
+        return 'mps'
+    return 'cpu'
+
+
 def train(args):
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    device = pick_device(getattr(args, 'device', None))
     print(f"Device: {device}")
 
     # Load data
@@ -362,5 +377,8 @@ if __name__ == '__main__':
     # Output
     parser.add_argument('--outdir', type=str, default='results/phase1')
     parser.add_argument('--log_every', type=int, default=10)
+    parser.add_argument('--device', type=str, default=None,
+                        choices=['cuda', 'mps', 'cpu'],
+                        help='Force compute device; default auto-detects CUDA > MPS > CPU')
     args = parser.parse_args()
     train(args)

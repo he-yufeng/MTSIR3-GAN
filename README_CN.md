@@ -12,15 +12,16 @@ MTSIR3-GAN 是一个将 **R3GAN**（NeurIPS 2024）从图像生成迁移到**多
 
 ### 核心特性
 
-- 🎯 **竞争性性能**：相比 SSGAN 降低约 10.6% MAE，相比 TimesNet 降低约 3.7% MAE
 - 🏗️ **现代化架构**：R3GAN-1D 一维卷积适配，Fixup 初始化，频域判别器
 - 🔬 **稳健训练机制**：正则化相对论损失（RpGAN + R₁ + R₂），训练稳定无模式坍塌
 - 🌐 **交互式图形界面**：基于 Dash 框架构建的 Web 界面，支持数据上传、可视化和插补
-- 📊 **系统实证研究（FMGAN）**：15+ 组实验，揭示 GAN 精炼何时有效、何时失效
+- 📊 **扩展实证研究（FMGAN）**：跨多个数据集与配置，系统研究由粗到精的对抗性精炼
 
-### 最新研究：FMGAN
+> MTSIR3-GAN 与 SSGAN / TimesNet 的对比为**毕设评测结果**，汇总见 [实验结果](#-实验结果)；其来自毕设评测，可通过下方训练脚本复现。
 
-`FMGAN/` 目录包含扩展研究的核心发现：**R3GAN 能将弱填补方法（均值填充/零填充）的 MAE 降低 48–70%，但无法改善强方法（线性插值，变化 <1%）**。这揭示了对抗性分布优化与逐点插补精度之间的根本矛盾。
+### 扩展研究：FMGAN
+
+[`FMGAN/`](FMGAN/) 目录包含一项关于「由粗到精的对抗性精炼何时有助于时序插补」的后续实证研究，详细成稿待发布。
 
 ## 🚀 快速开始
 
@@ -28,7 +29,7 @@ MTSIR3-GAN 是一个将 **R3GAN**（NeurIPS 2024）从图像生成迁移到**多
 
 ```bash
 # 克隆仓库
-git clone https://github.com/universeplayer/MTSIR3-GAN.git
+git clone https://github.com/he-yufeng/MTSIR3-GAN.git
 cd MTSIR3-GAN
 
 # 创建虚拟环境
@@ -221,21 +222,22 @@ datasets/
 
 ## 📈 实验结果
 
-在基准数据集上的对比性能（MAE ↓ 越低越好）：
+**毕设评测**——基准数据集上的插补误差（MAE ↓ 越低越好）。以下数字来自原毕设研究，可重跑训练脚本复现。
 
-| 数据集       | TimesNet | SSGAN | **MTSIR3-GAN** |
-|-------------|----------|-------|----------------|
-| AirQuality  | 0.396    | 0.435 | **0.412**      |
-| PhysioNet   | 0.656    | 0.598 | **0.631**      |
-| PSM (12.5%) | 0.544    | 0.586 | **0.524**      |
-| PSM (25%)   | 0.649    | 0.683 | **0.671**      |
-| PSM (50%)   | 0.782    | 0.761 | **0.737**      |
+| 数据集       | TimesNet  | SSGAN     | MTSIR3-GAN |
+|-------------|-----------|-----------|------------|
+| AirQuality  | **0.396** | 0.435     | 0.412      |
+| PhysioNet   | 0.656     | **0.598** | 0.631      |
+| PSM (12.5%) | 0.544     | 0.586     | **0.524**  |
+| PSM (25%)   | **0.649** | 0.683     | 0.671      |
+| PSM (50%)   | 0.782     | 0.761     | **0.737**  |
 
-**关键发现**：
-- ✅ 相比 SSGAN（GAN 基线）平均降低 10.6% 的 MAE
-- ✅ 相比 TimesNet（非 GAN 基线）平均降低 3.7% 的 MAE
-- ✅ 对数据异常值和离群点具有鲁棒性
-- ✅ 训练稳定，只需最少的超参数调整
+**观察**（加粗 = 该行最优）：
+- MTSIR3-GAN 与强非 GAN 基线（TimesNet）和 GAN 基线（SSGAN）相比具有竞争力，在较高缺失率的 PSM 上最优。
+- 没有任何单一方法在所有数据集与缺失率上全面占优。
+- 得益于正则化相对论损失，训练稳定。
+
+> 一项关于「对抗性精炼何时有效、何时无效」的后续实证研究见 [`FMGAN/`](FMGAN/)。
 
 ## 🔧 超参数调优
 
@@ -278,7 +280,7 @@ datasets/
 
 主要论文和资源：
 
-- **R3GAN**: Huang et al. "Re-GAN: A Minimalist Framework for Generative Adversarial Networks" (NeurIPS 2024)
+- **R3GAN**: Huang, Gokaslan, Kuleshov, Tompkin. "The GAN is dead; long live the GAN! A Modern GAN Baseline" (NeurIPS 2024)
 - **SSGAN**: Miao et al. "Generative Semi-supervised Learning for Multivariate Time Series Imputation" (AAAI 2021)
 - **TimesNet**: Wu et al. "TimesNet: Temporal 2D-Variation Modeling for General Time Series Analysis" (ICLR 2023)
 - **BRITS**: Cao et al. "BRITS: Bidirectional Recurrent Imputation for Time Series" (NeurIPS 2018)
@@ -286,8 +288,8 @@ datasets/
 ## 📧 联系方式
 
 - **作者**：何宇峰
-- **GitHub**：[@universeplayer](https://github.com/universeplayer)
-- **项目链接**：https://github.com/universeplayer/MTSIR3-GAN
+- **GitHub**：[@he-yufeng](https://github.com/he-yufeng)
+- **项目链接**：https://github.com/he-yufeng/MTSIR3-GAN
 
 ## 📄 许可证
 

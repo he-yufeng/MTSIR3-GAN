@@ -85,7 +85,9 @@ def run_dataset_experiment(dataset_name, data_path, seq_len, missing_rate=0.25):
 
     print(f'  Train: {train_obs.shape}, Test: {test_obs.shape}')
 
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    device = ('cuda' if torch.cuda.is_available()
+              else 'mps' if getattr(torch.backends, 'mps', None) is not None and torch.backends.mps.is_available()
+              else 'cpu')
     results = {}
 
     # 1. Linear Interpolation alone

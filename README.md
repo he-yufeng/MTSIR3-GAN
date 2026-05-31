@@ -12,15 +12,16 @@ MTSIR3-GAN is a research project adapting **R3GAN** (NeurIPS 2024) from image ge
 
 ### Key Features
 
-- 🎯 **Competitive Performance**: ~10.6% MAE reduction vs SSGAN and ~3.7% vs TimesNet on benchmark datasets
-- 🏗️ **Modern Architecture**: R3GAN-1D adaptation with 1D convolutions, Fixup initialization, and frequency-domain discriminator
+- 🏗️ **Modern Architecture**: R3GAN-1D adaptation with 1D convolutions, Fixup initialization, and a frequency-domain discriminator
 - 🔬 **Robust Training**: Regularized relativistic loss (RpGAN + R₁ + R₂) for stable adversarial training
 - 🌐 **Interactive GUI**: Dash-based web interface for data upload, visualization, and imputation
-- 📊 **Systematic Study (FMGAN)**: 15+ experiments revealing when GAN refinement helps vs. hurts
+- 📊 **Extended Empirical Study (FMGAN)**: a systematic study of coarse-to-fine adversarial refinement across multiple datasets and configurations
 
-### Latest Research: FMGAN
+> MS-thesis results comparing MTSIR3-GAN against SSGAN and TimesNet are summarized under [Experimental Results](#-experimental-results). They originate from the thesis evaluation and are reproducible via the training scripts below.
 
-The `FMGAN/` directory contains an extended study with the key finding: **R3GAN dramatically improves weak imputers (48–70% MAE reduction from mean/zero fill) but cannot improve strong ones (linear interpolation, <1% change)**. This reveals a fundamental tension between adversarial distributional optimization and point-wise imputation accuracy.
+### Extended Study: FMGAN
+
+The [`FMGAN/`](FMGAN/) directory contains a follow-up empirical study of coarse-to-fine adversarial refinement for time series imputation. A detailed write-up is forthcoming.
 
 ## 🚀 Quick Start
 
@@ -28,7 +29,7 @@ The `FMGAN/` directory contains an extended study with the key finding: **R3GAN 
 
 ```bash
 # Clone the repository
-git clone https://github.com/universeplayer/MTSIR3-GAN.git
+git clone https://github.com/he-yufeng/MTSIR3-GAN.git
 cd MTSIR3-GAN
 
 # Create virtual environment
@@ -47,6 +48,8 @@ python app_dad.py
 ```
 
 Then open your browser and navigate to `http://127.0.0.1:8050`
+
+> **Note:** Pretrained weights (`.pth`) and cached arrays are **not bundled** in the repository to keep it lightweight. Train a model first (see [Training Models from Scratch](#2-training-models-from-scratch)), or place your own weights under `PURE-GUIv2.0/model_files/`.
 
 ## 🎮 Usage
 
@@ -209,21 +212,22 @@ Discriminator:
 
 ## 📈 Experimental Results
 
-Comparative performance on benchmark datasets (MAE ↓ is better):
+MS-thesis evaluation — imputation error (MAE ↓ is better) on benchmark datasets. These numbers are from the original thesis study; rerun the training scripts to reproduce them.
 
-| Dataset      | TimesNet | SSGAN | **MTSIR3-GAN** |
-|--------------|----------|-------|----------------|
-| AirQuality   | 0.396    | 0.435 | **0.412**      |
-| PhysioNet    | 0.656    | 0.598 | **0.631**      |
-| PSM (12.5%)  | 0.544    | 0.586 | **0.524**      |
-| PSM (25%)    | 0.649    | 0.683 | **0.671**      |
-| PSM (50%)    | 0.782    | 0.761 | **0.737**      |
+| Dataset      | TimesNet  | SSGAN     | MTSIR3-GAN |
+|--------------|-----------|-----------|------------|
+| AirQuality   | **0.396** | 0.435     | 0.412      |
+| PhysioNet    | 0.656     | **0.598** | 0.631      |
+| PSM (12.5%)  | 0.544     | 0.586     | **0.524**  |
+| PSM (25%)    | **0.649** | 0.683     | 0.671      |
+| PSM (50%)    | 0.782     | 0.761     | **0.737**  |
 
-**Key Findings**:
-- ✅ Average 10.6% MAE reduction vs SSGAN (GAN baseline)
-- ✅ Average 3.7% MAE reduction vs TimesNet (non-GAN baseline)
-- ✅ Robust to data anomalies and outliers
-- ✅ Stable training with minimal hyperparameter tuning
+**Observations** (bold = best per row):
+- MTSIR3-GAN is competitive with both a strong non-GAN baseline (TimesNet) and a GAN baseline (SSGAN), and is best on PSM at the higher missing rate.
+- No single method dominates across all datasets and missing rates.
+- Training is stable thanks to the regularized relativistic loss.
+
+> A follow-up empirical study examining when adversarial refinement does and does not help lives in [`FMGAN/`](FMGAN/).
 
 ## 🔧 Hyperparameter Tuning
 
@@ -245,7 +249,6 @@ See [USAGE_GUIDE.md](USAGE_GUIDE.md) for complete training instructions.
 - **[README_CN.md](README_CN.md)** - 中文文档
 - **[USAGE_GUIDE.md](USAGE_GUIDE.md)** - Complete usage instructions for all models
 - **[PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md)** - Detailed project structure and file organization
-- **[GIT_UPLOAD_GUIDE.md](GIT_UPLOAD_GUIDE.md)** - Guide for contributing and uploading changes
 
 ## 🤝 Contributing
 
@@ -273,7 +276,7 @@ If you find this work useful, please consider citing:
 
 Key papers and resources:
 
-- **R3GAN**: Huang et al. "Re-GAN: A Minimalist Framework for Generative Adversarial Networks" (NeurIPS 2024)
+- **R3GAN**: Huang, Gokaslan, Kuleshov, Tompkin. "The GAN is dead; long live the GAN! A Modern GAN Baseline" (NeurIPS 2024)
 - **SSGAN**: Miao et al. "Generative Semi-supervised Learning for Multivariate Time Series Imputation" (AAAI 2021)
 - **TimesNet**: Wu et al. "TimesNet: Temporal 2D-Variation Modeling for General Time Series Analysis" (ICLR 2023)
 - **BRITS**: Cao et al. "BRITS: Bidirectional Recurrent Imputation for Time Series" (NeurIPS 2018)
@@ -281,8 +284,8 @@ Key papers and resources:
 ## 📧 Contact
 
 - **Author**: Yufeng He
-- **GitHub**: [@universeplayer](https://github.com/universeplayer)
-- **Project Link**: https://github.com/universeplayer/MTSIR3-GAN
+- **GitHub**: [@he-yufeng](https://github.com/he-yufeng)
+- **Project Link**: https://github.com/he-yufeng/MTSIR3-GAN
 
 ## 📄 License
 

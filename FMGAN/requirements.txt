@@ -9,7 +9,7 @@ pandas>=2.0.0
 scipy>=1.11.0
 
 # Foundation Model
-momentfm>=1.0.0
+momentfm==0.1.4  # was >=1.0.0 (PyPI 仅 ≤0.1.4, 不可满足); 代码按 0.1.4 写 (见 moment_wrapper.py)
 transformers>=4.36.0
 huggingface-hub>=0.20.0
 

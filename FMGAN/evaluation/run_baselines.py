@@ -125,7 +125,9 @@ def run_pypots_baseline(method_name, dataset_name, missing_rate=0.25,
 
     # Select and configure model
     n_features = X.shape[2]
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    device = ('cuda' if torch.cuda.is_available()
+              else 'mps' if getattr(torch.backends, 'mps', None) is not None and torch.backends.mps.is_available()
+              else 'cpu')
 
     model_configs = {
         'SAITS': lambda: SAITS(
@@ -246,7 +248,9 @@ def run_moment_baseline(dataset_name, missing_rate=0.25, missing_pattern='point'
     indicating_np = np.stack(indicating_all)
 
     # Run MOMENT
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    device = ('cuda' if torch.cuda.is_available()
+              else 'mps' if getattr(torch.backends, 'mps', None) is not None and torch.backends.mps.is_available()
+              else 'cpu')
     imputer = MOMENTImputer(frozen=True, device=device)
     imputer.to(device)
 

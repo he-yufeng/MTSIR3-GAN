@@ -18,7 +18,7 @@ Complete guide for running and training all models in this project.
 
 ### Step 1: Clone Repository
 ```bash
-git clone https://github.com/universeplayer/MTSIR3-GAN.git
+git clone https://github.com/he-yufeng/MTSIR3-GAN.git
 cd MTSIR3-GAN
 ```
 
@@ -582,8 +582,8 @@ DataLoader(dataset, num_workers=8, pin_memory=True)
 
 - **Documentation**: See `docs/` folder for detailed API reference
 - **Examples**: Check `examples/` for Jupyter notebooks
-- **Issues**: Report bugs on [GitHub Issues](https://github.com/universeplayer/MTSIR3-GAN/issues)
-- **Discussions**: Join [GitHub Discussions](https://github.com/universeplayer/MTSIR3-GAN/discussions)
+- **Issues**: Report bugs on [GitHub Issues](https://github.com/he-yufeng/MTSIR3-GAN/issues)
+- **Discussions**: Join [GitHub Discussions](https://github.com/he-yufeng/MTSIR3-GAN/discussions)
 
 ---
 
@@ -592,8 +592,8 @@ DataLoader(dataset, num_workers=8, pin_memory=True)
 If you encounter any issues:
 
 1. Check this guide first
-2. Search existing [GitHub Issues](https://github.com/universeplayer/MTSIR3-GAN/issues)
-3. Ask in [GitHub Discussions](https://github.com/universeplayer/MTSIR3-GAN/discussions)
+2. Search existing [GitHub Issues](https://github.com/he-yufeng/MTSIR3-GAN/issues)
+3. Ask in [GitHub Discussions](https://github.com/he-yufeng/MTSIR3-GAN/discussions)
 4. Open a new issue with:
    - Python version
    - PyTorch version
